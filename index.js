@@ -670,7 +670,7 @@ async function callLLMAPI(fullPrompt) {
     try {
         response = await fetch('/api/backends/chat-completions/generate', {
             method: 'POST',
-            headers: { ...getRequestHeaders(), 'Content-Type': 'application/json' },
+            headers: { ...getRequestHeaders(), 'custom_include_body': 'max_completion_tokens: 20000', 'custom_exclude_body': "- max_tokens", 'Content-Type': 'application/json' },
             body: JSON.stringify(parameters)
         });
     } catch (fetchError) {
