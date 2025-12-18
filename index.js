@@ -438,6 +438,7 @@ function updateModelList() {
 
     const models = {
         'openai': [
+            'gemini-3-flash-preview',
             'chatgpt-4o-latest',
             'gpt-4o',
             'gpt-4o-2024-11-20',
