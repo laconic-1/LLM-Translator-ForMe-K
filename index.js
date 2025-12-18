@@ -662,13 +662,15 @@ async function callLLMAPI(fullPrompt) {
     if (extensionSettings.use_reverse_proxy) {
         parameters.reverse_proxy = extensionSettings.reverse_proxy_url;
         parameters.proxy_password = extensionSettings.reverse_proxy_password;
+        parameters.custom_include_body = 'max_completion_tokens: 20000';
+        parameters.custom_exclude_body = '- max_tokens';
     }
 
     let response;
     try {
         response = await fetch('/api/backends/chat-completions/generate', {
             method: 'POST',
-            headers: { ...getRequestHeaders(), 'custom_include_body': 'max_completion_tokens: 20000', 'custom_exclude_body': "- max_tokens", 'Content-Type': 'application/json' },
+            headers: { ...getRequestHeaders(), 'Content-Type': 'application/json' },
             body: JSON.stringify(parameters)
         });
     } catch (fetchError) {
